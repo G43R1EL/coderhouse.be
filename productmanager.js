@@ -1,7 +1,19 @@
-// DESAFIO => Class ProductManager
+// DESAFIO => FileSystem
+const fs = require('fs')
+
 class ProductManager {
-    constructor() {
+    constructor(path) {
         this.products = []
+        this.path = path
+        fs.existsSync(this.path) ? this._read() : this._write()
+    }
+
+    _read () {
+        this.products = JSON.parse(fs.readFileSync(this.path, 'utf-8'))
+    }
+
+    _write () {
+        fs.writeFileSync(this.path, JSON.stringify(this.products))
     }
 
     getProducts() {
@@ -18,45 +30,36 @@ class ProductManager {
         }
     }
 
-    addProduct (title, description, price, thumbnail, code, stock) {
-        if (!this.products.find(prod => prod.code === code)) {
-            if (title && description && price && thumbnail && code && stock) {
-                let product = {
-                    id: Date.now(),
-                    description: description,
-                    price: price,
-                    thumbnail: thumbnail,
-                    code: code,
-                    stock: stock
-                }
+    addProduct (product) {
+        if (!this.products.find(prod => prod.code === product.code)) {
+            if (product.title && product.description && product.price && product.thumbnail && product.code && product.stock) {
+                product.id = Date.now()
                 this.products.push(product)
+                this._write()
             } else {
                 console.error('Todos los campos son obligatorios, producto no agregado.')
             }
         } else {
-            console.error(`El producto con código '${code}' ya existe... Producto no agregado.`)
+            console.error(`El producto con código '${product.code}' ya existe... Producto no agregado.`)
         }
+    }
+
+    updateProduct (id, updatedPrd) {
+        let productIdx = this.products.findIndex(product => product.id === id)
+        for (const property in updatedPrd) {
+            if (this.products[productIdx][property]) {
+                this.products[productIdx][property] = updatedPrd[property]
+                this._write()
+            } else {
+                console.error(`El valor ${property} no existe no se actualizará en el producto...`)
+            }
+        }
+    }
+
+    deleteProduct (id) {
+        this.products = this.products.filter(product => product.id !== id)
+        this._write()
     }
 }
 
 // TESTING
-console.log('Prueba 1: Creando instancia de ProductManager...')
-let prodmgr = new ProductManager()
-
-console.log('Prueba 2: Listando productos (incial) ->')
-console.log(prodmgr.getProducts())
-
-console.log('Prueba 3: Agregando producto de prueba, se genera ID automático que no se repite')
-prodmgr.addProduct('producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25)
-
-console.log('Prueba 4: Listando productos (ahora aparece el recién generado) ->')
-console.log(prodmgr.getProducts())
-
-console.log('Prueba 5: Agregando producto de prueba (duplicado)')
-prodmgr.addProduct('producto prueba', 'Este es un producto de prueba', 200, 'Sin imagen', 'abc123', 25)
-
-console.log('Prueba 6: Buscando por id (producto existente)')
-console.log(prodmgr.getProductById(prodmgr.getProducts()[0].id))
-
-console.log('Prueba 6: Buscando por id (inexistente)')
-console.log(prodmgr.getProductById(1234567890))
