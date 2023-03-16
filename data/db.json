@@ -1,12 +1,1 @@
-[
-    {"id":"0","title":"Un producto","description":"Una descripción"},
-    {"id":"1","title":"Otro producto","description":"Otra descripción"},
-    {"id":"2","title":"Otro producto","description":"Otra descripción"},
-    {"id":"3","title":"Otro producto","description":"Otra descripción"},
-    {"id":"4","title":"Otro producto","description":"Otra descripción"},
-    {"id":"5","title":"Otro producto","description":"Otra descripción"},
-    {"id":"6","title":"Otro producto","description":"Otra descripción"},
-    {"id":"7","title":"Otro producto","description":"Otra descripción"},
-    {"id":"8","title":"Otro producto","description":"Otra descripción"},
-    {"id":"9","title":"Otro producto","description":"Otra descripción"}
-]
+[{"title":"Otro producto","description":"Otro producto description","price":"150","thumbnail":"No image","code":"PRD002","stock":"2","id":1678984582774},{"title":"Un producto","description":"Un producto description","price":"350","thumbnail":"No image","code":"PRD001","stock":"3","id":1678985090515},{"title":"Otro producto","description":"Otro producto description","price":"200","thumbnail":"No image","code":"PRD003","stock":"1","id":1678985503451},{"title":"Otro producto","description":"Otro producto description","price":"200","thumbnail":"No image","code":"PRD004","stock":"1","id":1678985614150},{"title":"Otro producto","description":"Otro producto description","price":"200","thumbnail":"No image","code":"PRD005","stock":"1","id":1678985994527},{"title":"Otro producto","description":"Otro producto description","price":"200","thumbnail":"No image","code":"PRD006","stock":"1","id":1678986004588}]

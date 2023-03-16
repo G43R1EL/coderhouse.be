@@ -1,27 +1,49 @@
 import express from 'express'
-import ProductManager from "./productmanager.js"
+import { createServer } from 'http'
+import { Server } from 'socket.io'
+import engine from 'express-handlebars'
+import viewsRouter from './routes/views.js'
+import ProductManager from './productmanager.js'
 
 const prodmgr = new ProductManager('data/db.json')
 
+const hbs = engine.create({
+    extname: 'hbs',
+    defaultLayout: 'main',
+    layoutsDir: './views/layout'
+})
+
 const app = express()
+const server = createServer(app)
+const io = new Server(server, {})
+
+app.engine('hbs', hbs.engine)
+app.set('view engine', 'hbs')
+app.set('views', 'views')
+app.use(express.static('public'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use('/', viewsRouter)
 
-app.get('/products', async (req, res) => {
-    const productos = await prodmgr.getProducts()
-    if (productos.length > req.query.limit) {
-        productos.length = req.query.limit
-    }
-    res.send(productos)
-})
-
-app.get('/products/:pid', async (req, res) => {
-    const producto = await prodmgr.getProductById(req.params.pid)
-    res.send(producto)
-})
+io.on('connection', async (socket) => {
+    let products = await prodmgr.getProducts()
+    console.log('user connected');
+    socket.emit('products', products)
+    socket.on('ADD_PRODUCT', product => {
+        prodmgr.addProduct(product).then((msg)=>{
+            if (msg.success) {
+                prodmgr.getProducts().then((prod) => {
+                    io.sockets.emit('products', prod)
+                })
+            } else {
+                console.error(msg.error)
+            }
+        })
+    })
+});
 
 const PORT = 8080
-const server = app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Servidor en puerto ${PORT}`)
 })
 

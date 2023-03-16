@@ -1,0 +1,41 @@
+<h3>Live View!</h3>
+<hr>
+<div id="productsTable">
+</div>
+<hr>
+<form>
+    <div class="mb-3">
+        <label for="txtTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="txtTitle" aria-describedby="productName">
+        <div id="productName" class="form-text">Product title here.</div>
+    </div>
+    <div class="mb-3">
+        <label for="txtDescription" class="form-label">Description</label>
+        <input type="text" class="form-control" id="txtDescription" aria-describedby="productDescription">
+        <div id="productDescription" class="form-text">Product description here.</div>
+    </div>
+    <div class="mb-3">
+        <label for="numPrice" class="form-label">Price</label>
+        <input type="number" class="form-control" id="numPrice" aria-describedby="productPrice">
+        <div id="productPrice" class="form-text">Product price here.</div>
+    </div>
+    <div class="mb-3">
+        <label for="txtThumbnail" class="form-label">Thumbnail</label>
+        <input type="text" class="form-control" id="txtThumbnail" aria-describedby="productThumbnail">
+        <div id="productThumbnail" class="form-text">Product thumbnail here.</div>
+    </div>
+    <div class="mb-3">
+        <label for="txtCode" class="form-label">Code</label>
+        <input type="text" class="form-control" id="txtCode" aria-describedby="productCode">
+        <div id="productCode" class="form-text">Product code here.</div>
+    </div>
+    <div class="mb-3">
+        <label for="numStock" class="form-label">Stock</label>
+        <input type="number" class="form-control" id="numStock" aria-describedby="productStock">
+        <div id="productStock" class="form-text">Product stock here.</div>
+    </div>
+    <button type="submit" class="btn btn-primary" id="addProduct">Agregar</button>
+</form>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="js/ioClient.js"></script>
