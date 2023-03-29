@@ -1,0 +1,13 @@
+{{#if messages}}
+    {{#each messages}}
+        <div class="col-md-12 mt-2">
+            <p><small><b>&lt;{{user}}&gt;</b></small>&nbsp;<span>{{message}}</span></p>
+        </div>
+    {{/each}}
+{{else}}
+    <div class="row">
+        <div class="col-md-12 mt-2">
+            <p><span>No hay mensajes!</span></p>
+        </div>
+    </div>
+{{/if}}

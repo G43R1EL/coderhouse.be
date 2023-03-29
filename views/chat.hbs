@@ -1,0 +1,43 @@
+<div class="container mt-5">
+    <div class="card mt-4">
+        <div class="card-header">
+            Mensaje
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <input class="form-control" type="email" placeholder="Ingrese su email aquí..." id="txt_user"></input>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <div class="form-group">
+                        <textarea class="form-control" id="txt_message" rows="3" placeholder="Escriba su mensaje aquí..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <button class="btn btn-primary btn-block" id="btn_sendMessage">Enviar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card mt-4">
+        <div class="card-header">
+            Conversación
+        </div>
+        <div class="card-body" id="tbl_messages">
+            <div class="row">
+                <div class="col-md-12 mt-2">
+                    <p><small><b>&lt;user@domain.com&gt;</b></small>&nbsp;<span>lorem ipsum dolor sit amet</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+<script src="js/ioChat.js"></script>
