@@ -1,7 +1,7 @@
-import { Router } from 'express';
-import routerProducts from "./products.js";
-import routerCarts from "./carts.js";
-import routerChat from "./chat.js";
+import { Router } from 'express'
+import routerProducts from './products.js'
+import routerCarts from './carts.js'
+import routerChat from './chat.js'
 
 const router = Router()
 
