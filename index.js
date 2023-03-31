@@ -1,7 +1,7 @@
 import * as dotenv from 'dotenv'
 import express from 'express'
 import router from './routes/index.js'
-import router404 from './routes/404.js'
+import router404 from './routes/router404.js'
 import { init } from './dao/dbConnection.js'
 import { createServer } from 'http'
 import initSocket from './ioChat.js'
