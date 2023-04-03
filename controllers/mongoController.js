@@ -27,8 +27,16 @@ class PersistenceMongo {
     }
     
     async addItem(item) {
-        const response = await this.model.create(item)
-        return { status: 'success', payload: response }
+        try {
+            const response = await this.model.create(item)
+            return { status: 'success', payload: response }
+        } catch (err) {
+            if (err.code === 11000) {
+                return { status: 'error', message: `Duplicated value is forbidden.`}
+            } else {
+                return { status: 'error', message: err }
+            }
+        }
     }
     
     async updateById(id, update) {
