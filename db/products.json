@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Producto POST",
+    "description": "Producto posteado POSTMAN",
+    "code": "10002",
+    "price": "200",
+    "stock": "10",
+    "category": "Test",
+    "thumbnail": "",
+    "id": 1680500987354
+  },
+  {
+    "title": "Producto POST",
+    "description": "Producto posteado POSTMAN",
+    "code": "10000",
+    "price": "200",
+    "stock": "10",
+    "category": "Test",
+    "thumbnail": "",
+    "id": 1680500999572
+  }
+]

@@ -10,7 +10,12 @@ class PersistenceFS {
     async _readFile () {
         try {
             if (fs.existsSync(this.path)) {
-                this.data = JSON.parse(await fs.promises.readFile(this.path, 'utf8'))
+                const content = await fs.promises.readFile(this.path, 'utf8')
+                if (content) {
+                    this.data = JSON.parse(content)
+                } else {
+                    console.log(`Database file is empty...`)
+                }
             } else {
                 console.log(`File ${this.path} doesn't exists. Creating...`)
                 await this._writeFile()
@@ -22,7 +27,7 @@ class PersistenceFS {
 
     async _writeFile () {
         try {
-            await fs.promises.writeFile(this.path, JSON.stringify(this.data), 'utf8')
+            await fs.promises.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf8')
         } catch (err) {
             console.error(err)
         }
@@ -41,9 +46,9 @@ class PersistenceFS {
 
     async removeById (id) {
         try {
-            const count = this.data.length
-            this.data.splice(this.data.findIndex(item => item.id == id), 1)
-            if (count > this.data.length) {
+            const idx = this.data.findIndex(item => item.id == id)
+            if (idx !== -1) {
+                this.data.splice(idx, 1)
                 await this._writeFile()
                 return { status: 'success' }
             } else {
@@ -56,13 +61,11 @@ class PersistenceFS {
 
     async updateById (id, update) {
         try {
-            if (update.id) {
-                const idx = this.data.findIndex(item => item.id == id)
-                if (idx !== -1) {
-                    this.data[idx] = {...this.data[idx], ...update}
-                    await this._writeFile()
-                    return { status: 'success' }
-                }
+            const idx = this.data.findIndex(item => item.id == id)
+            if (idx !== -1) {
+                this.data[idx] = {...this.data[idx], ...update}
+                await this._writeFile()
+                return { status: 'success' }
             } else {
                 return { status: 'error', message: `Id: ${id} not found.` }
             }
