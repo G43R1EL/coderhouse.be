@@ -14,6 +14,7 @@ if (method==='mongodb') {
 
 const routerHome = Router()
 
+// Muestra una plantilla Handlebars con la lista de productos
 routerHome.get('/', async (req, res) => {
     const response = await persistence.getAll()
     const products = []

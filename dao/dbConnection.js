@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+// Inicia la conexión con Mongo
 export const init = async () => {
     try {
         const URI = process.env.MONGODB_URI

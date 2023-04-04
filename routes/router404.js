@@ -1,5 +1,6 @@
-import { Router } from 'express';
+import { Router } from 'express'
 
+// Router para gestionar las rutas que no se encuentran... Sólo muestra un mensaje.
 const router404 = Router()
 
 router404.get('/', (req, res) => {
