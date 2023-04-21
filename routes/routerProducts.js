@@ -18,8 +18,11 @@ const routerProducts = Router()
 
 // Enpoint envia respuesta con estado y payload (lista de productos)
 routerProducts.get('/', async (req, res) => {
-    const limit = Number(req.query.limit)
-    const response = await persistence.getAll()
+    const limit = Number(req.query.limit) || 10
+    const page = Number(req.query.page) || 1
+    const sort = req.query.sort || ''
+    const query = req.query.query || ''
+    const response = await persistence.getAll(limit, page, sort, query)
     if (limit && response.payload) {
         const products = []
         response.payload.forEach(item => { products.push(item) })

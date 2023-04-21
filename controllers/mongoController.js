@@ -12,8 +12,8 @@ class PersistenceMongo {
         }
     }
     
-    async getAll() {
-        const response = await this.model.find()
+    async getAll(limit=10, page=1, sort, query) {
+        const response = await this.model.paginate({query})
         return { status: 'success', payload: response }
     }
     
