@@ -13,7 +13,7 @@ class PersistenceMongo {
     }
     
     async getAll(limit=10, page=1, sort, query) {
-        const response = await this.model.paginate({query})
+        const response = await this.model.paginate()
         return { status: 'success', payload: response }
     }
     
