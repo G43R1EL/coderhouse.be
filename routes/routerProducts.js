@@ -23,12 +23,7 @@ routerProducts.get('/', async (req, res) => {
     const sort = req.query.sort || ''
     const query = req.query.query || ''
     const response = await persistence.getAll(limit, page, sort, query)
-    if (limit && response.payload) {
-        const products = []
-        response.payload.forEach(item => { products.push(item) })
-        if (limit < products.length) { products.length = limit }
-        response.payload = products
-    }
+    console.log(response.payload.docs)
     res.json(response)
 })
 
